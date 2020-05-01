@@ -21,7 +21,7 @@ function updateDisplay() {
     }
 
     var x = 50;
-    var width = Math.floor(1000 / numbers.length);
+    var width = Math.floor((1000 - x) / numbers.length);
     for (let i = 0; i < numbers.length; i++, x+= width) {
         var bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         var y = 570 - numbers[i];     
@@ -53,7 +53,7 @@ function linearSortOneStep(startIndex) {
     numbers[startIndex] = temp;
 
     updateDisplay();
-    setTimeout(function(j) {linearSortOneStep(j); console.log(j); }, 100, startIndex + 1);
+    setTimeout(function(j) { linearSortOneStep(j); }, 10, startIndex + 1);
 }
 
 function linearSort() {
@@ -61,11 +61,30 @@ function linearSort() {
 }
 
 function insertionSort() {
-    
+    alert("Insertion sort");
+}
+
+function bubbleSortOneStep(curIndex, counter) {
+    if (counter >= numbers.length) {
+        return;
+    }
+    if (curIndex + 1 >= numbers.length) {
+        curIndex = 0;
+        counter++;
+    }
+
+    if (numbers[curIndex] > numbers[curIndex + 1]) {
+        var temp = numbers[curIndex];
+        numbers[curIndex] = numbers[curIndex + 1];
+        numbers[curIndex + 1] = temp;
+    }
+
+    updateDisplay();
+    setTimeout(function(j) {bubbleSortOneStep(j)}, 10, curIndex + 1);
 }
 
 function bubbleSort() {
-    alert('Bubble Sort');
+    bubbleSortOneStep(0, 0);
 }
 
 function mergeSort() {
