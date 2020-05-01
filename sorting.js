@@ -1,5 +1,13 @@
 var numbers = [];
 
+function disableButtons(value) {
+    document.getElementById("linearSort").disabled = value;
+    document.getElementById("insertionSort").disabled = value;
+    document.getElementById("bubbleSort").disabled = value;
+    document.getElementById("mergeSort").disabled = value;
+    document.getElementById("generate_random").disabled = value;
+}
+
 function generateNums() {
     var size = document.getElementById('number').value;
     size = parseInt(size);
@@ -38,11 +46,12 @@ function updateDisplay() {
 
 function linearSortOneStep(startIndex) {
     if (startIndex >= numbers.length) {
+        disableButtons(false);
+        alert("Sorted");
         return;
     }
 
     var smallestIndex = startIndex;
-
     for (let i = startIndex; i < numbers.length; i++) {
         if (numbers[smallestIndex] > numbers[i]) {
             smallestIndex = i;
@@ -53,19 +62,43 @@ function linearSortOneStep(startIndex) {
     numbers[startIndex] = temp;
 
     updateDisplay();
-    setTimeout(function(j) { linearSortOneStep(j); }, 10, startIndex + 1);
+    setTimeout(function(j) { linearSortOneStep(j); }, 50, startIndex + 1);
 }
 
 function linearSort() {
-    linearSortOneStep(0);
+    disableButtons(true);
+    linearSortOneStep(0, 1);
+}
+
+function insertionSortOneStep(curIndex, counter) {
+    if (counter >= numbers.length) {
+        disableButtons(false);
+        alert("Sorted");
+        return;
+    }
+    if (curIndex <= 0) {
+        counter++;
+        curIndex = counter;
+    }
+    if (numbers[curIndex] < numbers[curIndex - 1]) {
+        var temp = numbers[curIndex];
+        numbers[curIndex] = numbers[curIndex - 1];
+        numbers[curIndex - 1] = temp;
+    }
+
+    updateDisplay();
+    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 50, curIndex - 1, counter);
 }
 
 function insertionSort() {
-    alert("Insertion sort");
+    disableButtons(true);
+    insertionSortOneStep(0, 0);
 }
 
 function bubbleSortOneStep(curIndex, counter) {
     if (counter >= numbers.length) {
+        alert("Sorted");
+        disableButtons(false);
         return;
     }
     if (curIndex + 1 >= numbers.length) {
@@ -80,10 +113,11 @@ function bubbleSortOneStep(curIndex, counter) {
     }
 
     updateDisplay();
-    setTimeout(function(j) {bubbleSortOneStep(j)}, 10, curIndex + 1);
+    setTimeout(function(i, j) { bubbleSortOneStep(i, j); }, 1, curIndex + 1, counter);
 }
 
 function bubbleSort() {
+    disableButtons(true);
     bubbleSortOneStep(0, 0);
 }
 
