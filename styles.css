@@ -34,3 +34,8 @@ button
 .bar:focus text {
   fill: red;
 }
+
+.barr
+{
+  fill: #ffffff;
+}
