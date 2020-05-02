@@ -1,4 +1,4 @@
-var numbers = [];
+var numbers = new Array;
 
 function disableButtons(value) {
     document.getElementById("linearSort").disabled = value;
@@ -34,7 +34,7 @@ function updateDisplay() {
         var bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         var y = 570 - numbers[i];     
 
-        bar.setAttribute("class", "numberBar");
+        bar.setAttribute("class", "arrayBar");
         bar.setAttribute("x", x.toString());
         bar.setAttribute("width", width.toString());
         bar.setAttribute("y", y.toString());
@@ -71,23 +71,24 @@ function linearSort() {
 }
 
 function insertionSortOneStep(curIndex, counter) {
-    if (counter >= numbers.length) {
+    if (counter >= numbers.length + 1) {
+        console.log(counter);
         disableButtons(false);
         alert("Sorted");
         return;
     }
-    if (curIndex <= 0) {
+    if (curIndex === 0 || numbers[curIndex] >= numbers[curIndex - 1]) {
         counter++;
         curIndex = counter;
     }
-    if (numbers[curIndex] < numbers[curIndex - 1]) {
+    else if (numbers[curIndex] < numbers[curIndex - 1]) {
         var temp = numbers[curIndex];
         numbers[curIndex] = numbers[curIndex - 1];
         numbers[curIndex - 1] = temp;
     }
-
+    
     updateDisplay();
-    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 50, curIndex - 1, counter);
+    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 20, curIndex - 1, counter);
 }
 
 function insertionSort() {
@@ -121,6 +122,63 @@ function bubbleSort() {
     bubbleSortOneStep(0, 0);
 }
 
+function merging(i, j, curIndex, leftArray, rightArray) {
+    if (i >= leftArray.length && j >= rightArray.length) {
+        return;
+    }
+
+    if (i < leftArray.length && j < rightArray.length) {
+        if (leftArray[i] <= rightArray[j]) {
+            numbers[curIndex] = leftArray[i]; 
+            i++;
+        } else {
+            numbers[curIndex] = rightArray[j];
+            j++;
+        }
+        curIndex++;
+    }
+    else if (i < leftArray.length) {
+        numbers[curIndex] = leftArray[i];
+        i++, curIndex++;
+    }
+    else if (j < rightArray.length) {
+        numbers[curIndex] = rightArray[j];
+        j++, curIndex++;
+    }
+
+    updateDisplay();
+    setTimeout(function(a, b, c, d, e) { merging(a, b, c, d, e); }, 20, i, j, curIndex, leftArray, rightArray);
+}
+
+function merge(left, mid, right) {
+    var size1 = mid - left + 1;
+    var size2 = right - mid;
+
+    var leftArray = new Array(size1);
+    for (let i = 0; i < size1; i++) {
+        leftArray[i] = numbers[i + left];
+    }
+
+    var rightArray = new Array(size2);
+    for (let i = 0; i < size2; i++) {
+        rightArray[i] = numbers[i + mid + 1];
+    }
+
+    merging(0, 0, left, leftArray, rightArray);
+}
+
+function mergeSortProcess(left, right) {
+    if (left < right) {
+        var mid = Math.floor((left + right) / 2);
+
+        mergeSortProcess(left, mid);
+        mergeSortProcess(mid + 1, right);
+
+        merge(left, mid, right);
+    }
+}
+
 function mergeSort() {
-    alert('Merge Sort');
+    mergeSortProcess(0, numbers.length - 1);
+    updateDisplay();
 }
