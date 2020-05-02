@@ -97,7 +97,7 @@ function insertionSort() {
 }
 
 function bubbleSortOneStep(curIndex, counter) {
-    if (counter >= numbers.length) {
+    if (counter === numbers.length) {
         alert("Sorted");
         disableButtons(false);
         return;
@@ -122,49 +122,8 @@ function bubbleSort() {
     bubbleSortOneStep(0, 0);
 }
 
-function merging(i, j, curIndex, leftArray, rightArray) {
-    if (i >= leftArray.length && j >= rightArray.length) {
-        return;
-    }
-
-    if (i < leftArray.length && j < rightArray.length) {
-        if (leftArray[i] <= rightArray[j]) {
-            numbers[curIndex] = leftArray[i]; 
-            i++;
-        } else {
-            numbers[curIndex] = rightArray[j];
-            j++;
-        }
-        curIndex++;
-    }
-    else if (i < leftArray.length) {
-        numbers[curIndex] = leftArray[i];
-        i++, curIndex++;
-    }
-    else if (j < rightArray.length) {
-        numbers[curIndex] = rightArray[j];
-        j++, curIndex++;
-    }
-
-    updateDisplay();
-    setTimeout(function(a, b, c, d, e) { merging(a, b, c, d, e); }, 20, i, j, curIndex, leftArray, rightArray);
-}
-
 function merge(left, mid, right) {
-    var size1 = mid - left + 1;
-    var size2 = right - mid;
 
-    var leftArray = new Array(size1);
-    for (let i = 0; i < size1; i++) {
-        leftArray[i] = numbers[i + left];
-    }
-
-    var rightArray = new Array(size2);
-    for (let i = 0; i < size2; i++) {
-        rightArray[i] = numbers[i + mid + 1];
-    }
-
-    merging(0, 0, left, leftArray, rightArray);
 }
 
 function mergeSortProcess(left, right) {
