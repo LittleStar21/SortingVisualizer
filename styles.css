@@ -16,11 +16,6 @@ button
     margin-left: 16px;
 }
 
-rect
-{
-    fill: red;
-}
-
 .bar {
   fill: red; /* changes the background */
   height: 21px;
@@ -38,9 +33,4 @@ rect
 .bar:hover text,
 .bar:focus text {
   fill: red;
-}
-
-.arrayBar
-{
-  fill: #ffffff;
 }

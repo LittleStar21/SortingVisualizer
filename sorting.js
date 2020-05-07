@@ -1,4 +1,4 @@
-var numbers = new Array;
+var numbers = [];
 var sorted = true;
 
 function disableButtons(value) {
@@ -42,18 +42,22 @@ function updateDisplay() {
         var bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         var y = 570 - numbers[i];     
 
-        bar.setAttribute("class", "arrayBar");
+        bar.setAttribute("id", "bar" + i.toString());
         bar.setAttribute("x", x.toString());
         bar.setAttribute("width", width.toString());
         bar.setAttribute("y", y.toString());
         bar.setAttribute("height", numbers[i].toString());
 
         document.getElementById("groupBar").appendChild(bar);
+        
+        bar = document.getElementById("bar" + i.toString());
+        bar.style.fill = "#CF6679";
+        bar.style.stroke = "#FFFFFF"
     }
 }
 
 function selectionSortOneStep(counter, curIndex, minIndex) {
-    if (counter >= numbers.length - 1) {
+    if (counter >= numbers.length) {
         disableButtons(false);
         sorted = true;
         return;
