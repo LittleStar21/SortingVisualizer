@@ -1,23 +1,30 @@
 var numbers = new Array;
+var sorted = true;
 
 function disableButtons(value) {
-    document.getElementById("linearSort").disabled = value;
+    document.getElementById("selectionSort").disabled = value;
     document.getElementById("insertionSort").disabled = value;
     document.getElementById("bubbleSort").disabled = value;
     document.getElementById("mergeSort").disabled = value;
     document.getElementById("generate_random").disabled = value;
 }
 
+function getRandInt(minInt, maxInt) {
+    return Math.floor(Math.random() * (maxInt - minInt + 1) + minInt);
+}
+
 function generateNums() {
-    var size = document.getElementById('number').value;
+    var size = document.getElementById("number").value;
     size = parseInt(size);
 
     if (numbers) {
         numbers = [];
     }
     for (let i = 0; i < size; i++) {
-        numbers[i] = Math.floor(Math.random() * 500);
+        number = getRandInt(10, 500);
+        numbers.push(number);
     }
+    sorted = false;
     updateDisplay();
 }
 
@@ -44,40 +51,44 @@ function updateDisplay() {
     }
 }
 
-function linearSortOneStep(startIndex) {
-    if (startIndex >= numbers.length) {
+function selectionSortOneStep(counter, curIndex, minIndex) {
+    if (counter >= numbers.length - 1) {
         disableButtons(false);
-        alert("Sorted");
+        sorted = true;
         return;
     }
-
-    var smallestIndex = startIndex;
-    for (let i = startIndex; i < numbers.length; i++) {
-        if (numbers[smallestIndex] > numbers[i]) {
-            smallestIndex = i;
-        }
+    if (minIndex < counter) {
+        minIndex = counter;
     }
-    var temp = numbers[smallestIndex];
-    numbers[smallestIndex] = numbers[startIndex];
-    numbers[startIndex] = temp;
+    if (curIndex >= numbers.length) {
+        var temp = numbers[minIndex];
+        numbers[minIndex] = numbers[counter];
+        numbers[counter] = temp;
 
+        counter++;
+        curIndex = counter;
+    }
+    if (numbers[minIndex] > numbers[curIndex]) {
+        minIndex = curIndex;
+    }
     updateDisplay();
-    setTimeout(function(j) { linearSortOneStep(j); }, 50, startIndex + 1);
+    setTimeout(function(i, j, k) { selectionSortOneStep(i, j, k); }, 1, counter, curIndex + 1, minIndex);
 }
 
-function linearSort() { 
-    disableButtons(true);
-    linearSortOneStep(0, 1);
+function selectionSort() { 
+    if (!sorted) {
+        disableButtons(true);
+        selectionSortOneStep(0, 0, 0)
+    }
 }
 
 function insertionSortOneStep(curIndex, counter) {
     if (counter >= numbers.length + 1) {
-        console.log(counter);
         disableButtons(false);
-        alert("Sorted");
+        sorted = true;
         return;
     }
-    if (curIndex === 0 || numbers[curIndex] >= numbers[curIndex - 1]) {
+    if (curIndex === 0 || numbers[curIndex] > numbers[curIndex - 1]) {
         counter++;
         curIndex = counter;
     }
@@ -92,14 +103,16 @@ function insertionSortOneStep(curIndex, counter) {
 }
 
 function insertionSort() {
-    disableButtons(true);
-    insertionSortOneStep(0, 0);
+    if (!sorted) {
+        disableButtons(true);
+        insertionSortOneStep(0, 0);
+    }
 }
 
 function bubbleSortOneStep(curIndex, counter) {
     if (counter === numbers.length) {
-        alert("Sorted");
         disableButtons(false);
+        sorted = true;
         return;
     }
     if (curIndex + 1 >= numbers.length) {
@@ -118,13 +131,16 @@ function bubbleSortOneStep(curIndex, counter) {
 }
 
 function bubbleSort() {
-    disableButtons(true);
-    bubbleSortOneStep(0, 0);
+    if (!sorted) {
+        disableButtons(true);
+        bubbleSortOneStep(0, 0);
+    }
 }
 
 function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex) {
     if (i > size - 1 && leftIndex >= leftArray.length && rightArray >= rightArray.length) {
         disableButtons(false);
+        sorted = true;
         return;
     }
     if (j >= size - 1 ) {
@@ -173,6 +189,8 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
 }
 
 function mergeSort() {
-    disableButtons(true);
-    mergeSortProcess(1, 0, numbers.length, 0, [], 0, [], 0);
+    if (!sorted) {
+        disableButtons(true);
+        mergeSortProcess(1, 0, numbers.length, 0, [], 0, [], 0);
+    }
 }
