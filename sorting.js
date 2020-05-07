@@ -6,6 +6,7 @@ function disableButtons(value) {
     document.getElementById("insertionSort").disabled = value;
     document.getElementById("bubbleSort").disabled = value;
     document.getElementById("mergeSort").disabled = value;
+    document.getElementById("number").disabled = value;
     document.getElementById("generate_random").disabled = value;
 }
 
