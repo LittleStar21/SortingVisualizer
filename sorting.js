@@ -1,5 +1,23 @@
-var numbers = [];
-var sorted = true;
+const unsorted_color = "#CF6679";
+const pointer_color = "#FFFFFF";
+const sorted_color = "#6200EE";
+
+class Bar {
+    constructor(idNum, value) {
+        this.idNum = idNum;
+        this.value = value
+        this.fill = "#CF6679";
+        this.stroke = "#FFFFFF";
+    }
+
+    getId() { return this.idNum; }
+    getValue() { return this.value; }
+    getFill() { return this.fill; }
+    getStroke() { return this.stroke }
+
+    setFill(fill) { this.fill = fill; }
+    setStroke(stroke) { this.stroke = this.stroke; }
+}
 
 function disableButtons(value) {
     document.getElementById("selectionSort").disabled = value;
@@ -14,20 +32,22 @@ function getRandInt(minInt, maxInt) {
     return Math.floor(Math.random() * (maxInt - minInt + 1) + minInt);
 }
 
-function generateNums() {
-    var size = document.getElementById("number").value;
-    size = parseInt(size);
+var numbers = new Array();
+var sorted = false;
 
-    if (numbers) {
+function generateNums() {
+    if (numbers.length !== 0) {
         numbers = [];
     }
+    var size = document.getElementById("number").value;
     for (let i = 0; i < size; i++) {
-        number = getRandInt(10, 500);
-        numbers.push(number);
+        var num = getRandInt(50, 500);
+        numbers[i] = new Bar(i, num);
     }
     sorted = false;
     updateDisplay();
 }
+
 
 function updateDisplay() {
     var groupBar = document.getElementById("groupBar");
@@ -40,50 +60,67 @@ function updateDisplay() {
     var width = Math.floor((1000 - x) / numbers.length);
     for (let i = 0; i < numbers.length; i++, x+= width) {
         var bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-        var y = 570 - numbers[i];     
+        var y = 570 - numbers[i].value;     
 
-        bar.setAttribute("id", "bar" + i.toString());
+        bar.setAttribute("id", "bar" + numbers[i].idNum.toString());
         bar.setAttribute("x", x.toString());
         bar.setAttribute("width", width.toString());
         bar.setAttribute("y", y.toString());
-        bar.setAttribute("height", numbers[i].toString());
+        bar.setAttribute("height", numbers[i].value.toString());
 
         document.getElementById("groupBar").appendChild(bar);
         
         bar = document.getElementById("bar" + i.toString());
-        bar.style.fill = "#CF6679";
-        bar.style.stroke = "#FFFFFF"
+        bar.style.fill = numbers[i].fill;
+        bar.style.stroke = numbers[i].stroke;
     }
 }
 
 function selectionSortOneStep(counter, curIndex, minIndex) {
-    if (counter >= numbers.length) {
+    if (counter === numbers.length) {
+        numbers[numbers.length - 1].fill = sorted_color;
+        updateDisplay();
+
         disableButtons(false);
         sorted = true;
         return;
     }
-    if (minIndex < counter) {
-        minIndex = counter;
-    }
-    if (curIndex >= numbers.length) {
-        var temp = numbers[minIndex];
-        numbers[minIndex] = numbers[counter];
-        numbers[counter] = temp;
+    if (curIndex === numbers.length) {
+        var temp = numbers[minIndex].value;
+        numbers[minIndex].value = numbers[counter].value;
+        numbers[counter].value = temp;
+
+        numbers[numbers.length - 1].fill = unsorted_color;
 
         counter++;
         curIndex = counter;
     }
-    if (numbers[minIndex] > numbers[curIndex]) {
+    
+    for (let i = 0; i < counter; i++) {
+        numbers[i].fill = sorted_color;
+    }
+
+    if (curIndex < numbers.length) {
+        numbers[curIndex].fill = pointer_color;
+    }
+    if (curIndex > 0) {
+        numbers[curIndex - 1].fill = unsorted_color;
+    }
+
+    if (minIndex < counter) {
+        minIndex = counter;
+    }
+    else if (numbers[minIndex].value > numbers[curIndex].value) {
         minIndex = curIndex;
     }
     updateDisplay();
     setTimeout(function(i, j, k) { selectionSortOneStep(i, j, k); }, 1, counter, curIndex + 1, minIndex);
 }
 
-function selectionSort() { 
+function selectionSort() {
     if (!sorted) {
         disableButtons(true);
-        selectionSortOneStep(0, 0, 0)
+        selectionSortOneStep(0, 0, 0);
     }
 }
 
@@ -102,7 +139,6 @@ function insertionSortOneStep(curIndex, counter) {
         numbers[curIndex] = numbers[curIndex - 1];
         numbers[curIndex - 1] = temp;
     }
-    
     updateDisplay();
     setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 1, curIndex - 1, counter);
 }
@@ -126,9 +162,11 @@ function bubbleSortOneStep(curIndex, counter) {
     }
 
     if (numbers[curIndex] > numbers[curIndex + 1]) {
-        var temp = numbers[curIndex];
-        numbers[curIndex] = numbers[curIndex + 1];
-        numbers[curIndex + 1] = temp;
+        var temp = new Bar();
+
+        // var temp = numbers[curIndex];
+        // numbers[curIndex] = numbers[curIndex + 1];
+        // numbers[curIndex + 1] = temp;
     }
 
     updateDisplay();
@@ -187,6 +225,7 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
         numbers[curIndex] = rightArray[rightIndex];
         rightIndex++, curIndex++;
     }
+
     updateDisplay();
     setTimeout(function(a, b, c, d, e, f, g, h) {
         mergeSortProcess(a, b, c, d, e, f, g, h);
