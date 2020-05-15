@@ -114,7 +114,7 @@ function selectionSortOneStep(counter, curIndex, minIndex) {
         minIndex = curIndex;
     }
     updateDisplay();
-    setTimeout(function(i, j, k) { selectionSortOneStep(i, j, k); }, 1, counter, curIndex + 1, minIndex);
+    setTimeout(function(i, j, k) { selectionSortOneStep(i, j, k); }, 20, counter, curIndex + 1, minIndex);
 }
 
 function selectionSort() {
@@ -156,7 +156,7 @@ function insertionSortOneStep(curIndex, counter) {
         numbers[curIndex].fill = sorted_color;
     }
     updateDisplay();
-    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 1, curIndex - 1, counter);
+    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 50, curIndex - 1, counter);
 }
 
 function insertionSort() {
@@ -167,32 +167,42 @@ function insertionSort() {
 }
 
 function bubbleSortOneStep(curIndex, counter) {
-    if (counter === numbers.length) {
+    if (counter === 0) {
+        numbers[0].fill = sorted_color;
+        updateDisplay();
+
         disableButtons(false);
         sorted = true;
         return;
     }
-    if (curIndex + 1 >= numbers.length) {
+    if (curIndex === counter) {
+        numbers[counter].fill = sorted_color;
         curIndex = 0;
-        counter++;
+        counter--;
+        if (counter >= 0) {
+            numbers[counter].fill = unsorted_color;
+        }
     }
-
-    if (numbers[curIndex] > numbers[curIndex + 1]) {
-        var temp = new Bar();
-
-        // var temp = numbers[curIndex];
-        // numbers[curIndex] = numbers[curIndex + 1];
-        // numbers[curIndex + 1] = temp;
+    numbers[curIndex].fill = pointer_color;
+    if (curIndex > 0) {
+        numbers[curIndex - 1].fill = unsorted_color;
     }
+    if (numbers[curIndex].value > numbers[curIndex + 1].value) {
+        var temp = numbers[curIndex].value;
+        numbers[curIndex].value = numbers[curIndex + 1].value;
+        numbers[curIndex + 1].value = temp;
 
+        numbers[curIndex + 1].fill = pointer_color;
+        numbers[curIndex].fill = unsorted_color;
+    }
     updateDisplay();
-    setTimeout(function(i, j) { bubbleSortOneStep(i, j); }, 1, curIndex + 1, counter);
+    setTimeout(function(i, j) { bubbleSortOneStep(i, j); }, 10, curIndex + 1, counter);
 }
 
 function bubbleSort() {
     if (!sorted) {
         disableButtons(true);
-        bubbleSortOneStep(0, 0);
+        bubbleSortOneStep(0, numbers.length - 1);
     }
 }
 
