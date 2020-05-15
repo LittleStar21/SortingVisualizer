@@ -125,35 +125,38 @@ function selectionSort() {
 }
 
 function insertionSortOneStep(curIndex, counter) {
+    console.log(counter - 1);
+    for (let i = 0; i < counter - 1; i++) {
+        numbers[i].fill = sorted_color;
+    }
+    updateDisplay();
     if (counter === numbers.length + 1) {
         disableButtons(false);
         sorted = true;
         return;
     }
-    for (let i = 0; i < curIndex; i++) {
-        numbers[i].fill = sorted_color;
-    }
     if (curIndex === 0 || numbers[curIndex].value > numbers[curIndex - 1].value) {
-        console.log(curIndex);
         if (curIndex + 1 < numbers.length) {
             numbers[curIndex + 1].fill = sorted_color;
             numbers[curIndex].fill = sorted_color;
         }
         counter++;
         curIndex = counter;
+
+        if (counter > 0 && counter - 1 < numbers.length)
+            numbers[counter - 1].fill = pointer_color;
     }
     else if (numbers[curIndex].value < numbers[curIndex - 1].value) {
         var temp = numbers[curIndex].value;
         numbers[curIndex].value = numbers[curIndex - 1].value;
         numbers[curIndex - 1].value = temp;
 
-        numbers[curIndex].fill = pointer_color;
-        if (curIndex + 1 < counter) {
-            numbers[curIndex + 1].fill = sorted_color;
-        }
+        if (curIndex > 0)
+            numbers[curIndex - 1].fill = pointer_color;
+        numbers[curIndex].fill = sorted_color;
     }
     updateDisplay();
-    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 15, curIndex - 1, counter);
+    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 1, curIndex - 1, counter);
 }
 
 function insertionSort() {
