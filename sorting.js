@@ -118,7 +118,7 @@ function selectionSortOneStep(counter, curIndex, minIndex) {
         minIndex = curIndex;
     }
     updateDisplay();
-    setTimeout(function(i, j, k) { selectionSortOneStep(i, j, k); }, 20, counter, curIndex + 1, minIndex);
+    setTimeout(function(i, j, k) { selectionSortOneStep(i, j, k); }, Math.floor(350 / numbers.length), counter, curIndex + 1, minIndex);
 }
 
 function selectionSort() {
@@ -159,7 +159,7 @@ function insertionSortOneStep(curIndex, counter) {
         numbers[curIndex].fill = SORTED_COLOR;
     }
     updateDisplay();
-    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, 50, curIndex - 1, counter);
+    setTimeout(function(i, j) { insertionSortOneStep(i, j); }, Math.floor(1000 / numbers.length), curIndex - 1, counter);
 }
 
 function insertionSort() {
@@ -199,7 +199,7 @@ function bubbleSortOneStep(curIndex, counter) {
         numbers[curIndex].fill = UNSORTED_COLOR;
     }
     updateDisplay();
-    setTimeout(function(i, j) { bubbleSortOneStep(i, j); }, 10, curIndex + 1, counter);
+    setTimeout(function(i, j) { bubbleSortOneStep(i, j); }, Math.floor(300 / numbers.length), curIndex + 1, counter);
 }
 
 function bubbleSort() {
@@ -260,14 +260,11 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
         rightIndex++, curIndex++;
     }
 
+    for (let k = 0; k < curIndex; k++) {
+        numbers[k].fill = UNSORTED_COLOR;
+    }
     if (leftIndex < leftArray.length || rightIndex < rightArray.length) {
         numbers[curIndex].fill = POINTER_COLOR;
-        if (curIndex > 0) {
-            numbers[curIndex - 1].fill = UNSORTED_COLOR;
-        }
-        if (curIndex > 1) {
-            numbers[curIndex - 2].fill = UNSORTED_COLOR;
-        }
     } else {
         numbers[size - 1].fill = UNSORTED_COLOR;
     }
@@ -275,7 +272,7 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
     updateDisplay();
     setTimeout(function(a, b, c, d, e, f, g, h) {
         mergeSortProcess(a, b, c, d, e, f, g, h);
-    }, 10, i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex);
+    }, Math.floor(800 / numbers.length), i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex);
 }
 
 function mergeSortColor(curIndex) {
@@ -286,7 +283,7 @@ function mergeSortColor(curIndex) {
     }
     numbers[curIndex].fill = SORTED_COLOR;
     updateDisplay();
-    setTimeout(function(a) { mergeSortColor(a); }, 10, curIndex + 1);
+    setTimeout(function(a) { mergeSortColor(a); }, Math.floor(800 / numbers.length), curIndex + 1);
 }
 
 function mergeSort() {
