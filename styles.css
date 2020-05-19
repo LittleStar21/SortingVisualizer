@@ -1,12 +1,12 @@
 body {
-    background-color: #2F3640;
-    font-family: Verdana;
-    overflow: hidden;
+  background-color: #2F3640;
+  font-family: Verdana;
+  overflow: hidden;
 }
 
 button {
-    margin-left: 5px;
-    margin-right: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .sort_button {

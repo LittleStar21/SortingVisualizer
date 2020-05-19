@@ -52,7 +52,7 @@ function generateNums() {
     if (numbers.length !== 0) {
         numbers = [];
     }
-    // var size = document.getElementById("number").value;
+
     for (let i = 0; i < size; i++) {
         var num = getRandInt(50, 500);
         numbers[i] = new Bar(i, num);
@@ -269,11 +269,16 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
         rightIndex++, curIndex++;
     }
 
-    for (let k = 0; k < curIndex; k++) {
+    for (let k = 0; k < numbers.length; k++) {
         numbers[k].fill = UNSORTED_COLOR;
     }
     if (leftIndex < leftArray.length || rightIndex < rightArray.length) {
         numbers[curIndex].fill = POINTER_COLOR;
+        
+        var next = curIndex + leftArray.length;
+        if (next < numbers.length) {
+            numbers[next].fill = POINTER_COLOR;
+        }
     } else {
         numbers[size - 1].fill = UNSORTED_COLOR;
     }
@@ -281,7 +286,7 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
     updateDisplay();
     setTimeout(function(a, b, c, d, e, f, g, h) {
         mergeSortProcess(a, b, c, d, e, f, g, h);
-    }, Math.floor(800 / numbers.length), i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex);
+    }, Math.floor(1000 / numbers.length), i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex);
 }
 
 function mergeSortColor(curIndex) {
