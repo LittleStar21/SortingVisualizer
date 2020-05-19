@@ -9,14 +9,6 @@ class Bar {
         this.fill = "#CF6679";
         this.stroke = "#FFFFFF";
     }
-
-    getId() { return this.idNum; }
-    getValue() { return this.value; }
-    getFill() { return this.fill; }
-    getStroke() { return this.stroke }
-
-    setFill(fill) { this.fill = fill; }
-    setStroke(stroke) { this.stroke = this.stroke; }
 }
 
 window.onload = function() {

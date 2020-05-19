@@ -1,7 +1,6 @@
 body {
     background-color: #2F3640;
     font-family: Verdana;
-    overflow: hidden;
 }
 
 button {
@@ -14,13 +13,15 @@ button {
     margin-left: 16px;
 }
 
-
 .select-box {
+  float: right;
+  margin-top: 15px;
+  margin-right: 20px;
+  font-size: 14px;
   display: inline-flex;
   width: 250px;
-  height: 125px;
+  height: 150px;
   flex-direction: column;
-  padding-top: 32px;
 }
 
 .select-box .options-container {
@@ -112,8 +113,8 @@ button {
   pointer-events: none;
   border: none;
   margin-top: 10px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 
 .sorted_color {
@@ -121,8 +122,8 @@ button {
   pointer-events: none;
   border: none;
   margin-top: 10px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 
 .compare_color {
@@ -130,14 +131,13 @@ button {
   pointer-events: none;
   border: none;
   margin-top: 10px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 
 .generate_button {
   position: relative;
-  margin-top: 30px;
-  float: right;
+  margin-top: 10px;
   font-size: 18px;
   width: 250px;
   height: 50px;
