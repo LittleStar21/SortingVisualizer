@@ -8,23 +8,50 @@
         <title>Soring Algorithm Visualizer</title>
     </head>
     <body>
-        <div class="sort_button">
+        <span class="sort_button">
             <button id="selectionSort" class="btn btn-info" onclick="selectionSort();">Selection Sort</button>
             <button id="insertionSort" class="btn btn-info" onclick="insertionSort();">Insertion Sort</button>
             <button id="bubbleSort" class="btn btn-info" onclick="bubbleSort();">Bubble Sort</button>
             <button id="mergeSort" class="btn btn-info" onclick="mergeSort();">Merge Sort</button>
-            <select id="number" onchange="generateNums();">
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="75">75</option>
-                <option value="100">100</option>
-            </select>
-            <button id="generate_random" class="btn btn-outline-info" style="float: right; margin-right: 64px; font-size: 24px;" onclick="generateNums();">
-                Generate Random
-            </button>
-        </div>
+        </span>
+        
+        <span class="select-box">
+            <div class="options-container">
+                <div class="option">
+                    <input type="radio" class="radio" id="25" name="category">
+                    <label>25</label>
+                </div>
 
-        <!-- Vertical bar chart -->
+                <div class="option">
+                    <input type="radio" class="radio" id="50" name="category">
+                    <label>50</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="radio" id="75" name="category">
+                    <label>75</label>
+                </div>
+                <div class="option">
+                    <input type="radio" class="radio" id="100" name="category">
+                    <label>100</label>
+                </div>   
+            </div>
+            <div class="selected" style="display: inline-block;">Number of Elements</div>
+        </span>
+
+        <span class="color_info">
+            <button class="unsorted_color"></button>Unsorted
+        </span>
+        <span class="color_info">
+            <button class="sorted_color"></button>Sorted
+        </span>
+        <span class="color_info">
+            <button class="compare_color"></button>Comparing
+        </span>
+
+
+        <button id= "generate_random" class="generate_button" type="button" onclick="generateNums();">Generate Random</button>
+
+
         <div>
             <svg width="1000" height="700" id="groupBar"></svg>
         </div>

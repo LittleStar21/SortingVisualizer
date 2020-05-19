@@ -28,7 +28,6 @@ function disableButtons(value) {
     document.getElementById("insertionSort").disabled = value;
     document.getElementById("bubbleSort").disabled = value;
     document.getElementById("mergeSort").disabled = value;
-    document.getElementById("number").disabled = value;
     document.getElementById("generate_random").disabled = value;
 }
 
@@ -38,12 +37,30 @@ function getRandInt(minInt, maxInt) {
 
 var numbers = new Array();
 var sorted = false;
+var size = 25;
+
+const selected = document.querySelector(".selected");
+const optionsContainer = document.querySelector(".options-container");
+
+const optionsList = document.querySelectorAll(".option");
+
+selected.addEventListener("click", () => {
+    optionsContainer.classList.toggle("active");
+});
+
+optionsList.forEach(o => {
+    o.addEventListener("click", () => {
+        size = o.querySelector("label").innerHTML;
+        selected.innerHTML = o.querySelector("label").innerHTML;
+        optionsContainer.classList.remove("active");
+    });
+});
 
 function generateNums() {
     if (numbers.length !== 0) {
         numbers = [];
     }
-    var size = document.getElementById("number").value;
+    // var size = document.getElementById("number").value;
     for (let i = 0; i < size; i++) {
         var num = getRandInt(50, 500);
         numbers[i] = new Bar(i, num);

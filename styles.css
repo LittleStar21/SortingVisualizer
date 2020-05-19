@@ -1,36 +1,160 @@
-body
-{
-    background-color: #121212;
+body {
+    background-color: #2F3640;
     font-family: Verdana;
+    overflow: hidden;
 }
 
-button
-{
+button {
     margin-left: 5px;
     margin-right: 5px;
 }
 
-.sort_button
-{
+.sort_button {
     margin-top: 16px;
     margin-left: 16px;
 }
 
-.bar {
-  fill: red; /* changes the background */
-  height: 21px;
-  transition: fill .3s ease;
+
+.select-box {
+  display: inline-flex;
+  width: 250px;
+  height: 125px;
+  flex-direction: column;
+  padding-top: 32px;
+}
+
+.select-box .options-container {
+  background: #F5F6FA;
+  color: #2F3640;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+
+  order: 1;
+}
+
+.selected {
+  background: #F5F6FA;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #2F3640;
+  position: relative;
+
+  order: 0;
+}
+
+.selected::after {
+  content: "";
+  background: url(down-arrow.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+
+  transition: all 0.4s;
+}
+
+.select-box .options-container.active {
+  max-height: 125px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box .options-container.active + .selected::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  width: 8px;
+  background: #0D141F;
+  border-radius: 0 px 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  background-color: #525861;
+  border-radius: 0 px 8px 8px 0;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px 24px;
   cursor: pointer;
-  font-family: Helvetica, sans-serif;
 }
-.bar text {
-  color: black;
+
+.select-box .option:hover {
+  background: #D3D3D3;
 }
-.bar:hover,
-.bar:focus {
-  fill: black;
+
+.select-box label {
+  cursor: pointer;
 }
-.bar:hover text,
-.bar:focus text {
-  fill: red;
+
+.select-box .option .radio {
+  display: none;
+}
+
+.color_info {
+  font-size: 12px;
+  color: #D3D3D3;
+  position: relative;
+}
+
+.unsorted_color {
+  background-color: #CF6679;
+  pointer-events: none;
+  border: none;
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.sorted_color {
+  background-color: #6200EE;
+  pointer-events: none;
+  border: none;
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.compare_color {
+  background-color: #FFFFFF;
+  pointer-events: none;
+  border: none;
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.generate_button {
+  position: relative;
+  margin-top: 30px;
+  float: right;
+  font-size: 18px;
+  width: 250px;
+  height: 50px;
+  background: none;
+  color: white;
+  border: 1px solid #C1ffC1;
+  border-radius: 4px;
+  transition: .4s;
+  overflow: hidden;
+}
+
+.generate_button:focus {
+  outline: none;
+}
+
+.generate_button:hover {
+  background: #C1FFC1;
+  color: #37515F;
+  cursor: pointer;
 }
