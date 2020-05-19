@@ -1,6 +1,7 @@
 body {
     background-color: #2F3640;
     font-family: Verdana;
+    overflow: hidden;
 }
 
 button {
@@ -9,8 +10,25 @@ button {
 }
 
 .sort_button {
-    margin-top: 16px;
-    margin-left: 16px;
+  font-size: 16px;
+  margin-top: 16px;
+  margin-left: 6px;
+  padding: 12px;
+  background-color: #17A2B8;
+  color: #F5F6FA;
+  border: none;
+  border-radius: 5px;
+  transition: .4s;
+}
+
+.sort_button:focus {
+  outline: none;
+}
+
+.sort_button:hover {
+  background: #96D6E0;
+  color: #37515F;
+  cursor: pointer;
 }
 
 .select-box {
