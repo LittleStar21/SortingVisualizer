@@ -5,17 +5,19 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="icon" type="image/x-icon" href="https://cdn2.iconfinder.com/data/icons/big-data-10/64/Data-compression-database-file-system-512.png" />
         <link href="styles.css" rel="stylesheet">
-        <title>Soring Algorithm Visualizer</title>
+        <title>Sorting Algorithm Visualizer</title>
     </head>
     <body>
-
+        <!-- Sorting buttons -->
         <button id="selectionSort" class="sort_button" onclick="selectionSort();" style="padding-left: 16px;">Selection Sort</button>
         <button id="insertionSort" class="sort_button" onclick="insertionSort();">Insertion Sort</button>
         <button id="bubbleSort" class="sort_button" onclick="bubbleSort();">Bubble Sort</button>
         <button id="mergeSort" class="sort_button" onclick="mergeSort();">Merge Sort</button>
 
+        <!-- Generate random button -->
         <button id= "generate_random" class="generate_button" type="button" onclick="generateNums();">Generate Random</button>
 
+        <!-- Color info -->
         <span class="color_info">
             <button class="unsorted_color"></button>Unsorted
         </span>
@@ -26,13 +28,13 @@
             <button class="compare_color"></button>Comparing
         </span>
 
+        <!-- Number of elements -->
         <span class="select-box">
             <div class="options-container">
                 <div class="option">
                     <input type="radio" class="radio" id="25" name="category">
                     <label>25</label>
                 </div>
-
                 <div class="option">
                     <input type="radio" class="radio" id="50" name="category">
                     <label>50</label>
@@ -48,13 +50,17 @@
             </div>
             <div class="selected" style="display: inline-block;">Number of Elements: 25</div>
         </span>
-        
-
-
+    
+        <!-- Bar -->
         <div>
             <svg width="1000" height="700" id="groupBar"></svg>
         </div>
 
     </body>
-    <script src="sorting.js"></script>
+
+    <script src="javascript/main.js"></script>
+    <script src="javascript/selection_sort.js"></script>
+    <script src="javascript/insertion_sort.js"></script>
+    <script src="javascript/bubble_sort.js"></script>
+    <script src="javascript/merge_sort.js"></script>
 </html>
