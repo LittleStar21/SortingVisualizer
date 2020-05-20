@@ -1,13 +1,15 @@
-const UNSORTED_COLOR = "#CF6679";
-const POINTER_COLOR = "#FFFFFF";
-const SORTED_COLOR = "#6200EE";
+const UNSORTED_COLOR = "#E77557";
+const UNSORTED_BORDER = "#F2F2F2";
+const POINTER_COLOR = "#F2F2F2";
+const SORTED_COLOR = "#AED3F2";
+const SORTED_BORDER = "#385D84";
 
 class Bar {
     constructor(idNum, value) {
         this.idNum = idNum;
         this.value = value
-        this.fill = "#CF6679";
-        this.stroke = "#FFFFFF";
+        this.fill = UNSORTED_COLOR;
+        this.stroke = UNSORTED_BORDER;
     }
 }
 
@@ -92,6 +94,7 @@ function updateDisplay() {
 function selectionSortOneStep(counter, curIndex, minIndex) {
     if (counter === numbers.length) {
         numbers[numbers.length - 1].fill = SORTED_COLOR;
+        numbers[numbers.length - 1].stroke = SORTED_BORDER;
         updateDisplay();
 
         disableButtons(false);
@@ -104,6 +107,7 @@ function selectionSortOneStep(counter, curIndex, minIndex) {
         numbers[counter].value = temp;
 
         numbers[numbers.length - 1].fill = UNSORTED_COLOR;
+        numbers[numbers.length - 1].stroke = UNSORTED_BORDER;
 
         counter++;
         curIndex = counter;
@@ -111,13 +115,16 @@ function selectionSortOneStep(counter, curIndex, minIndex) {
     
     for (let i = 0; i < counter; i++) {
         numbers[i].fill = SORTED_COLOR;
+        numbers[i].stroke = SORTED_BORDER;
     }
 
     if (curIndex < numbers.length) {
         numbers[curIndex].fill = POINTER_COLOR;
+        numbers[curIndex].stroke = UNSORTED_BORDER;
     }
     if (curIndex > 0) {
         numbers[curIndex - 1].fill = UNSORTED_COLOR;
+        numbers[curIndex - 1].stroke = UNSORTED_BORDER;
     }
 
     if (minIndex < counter) {
@@ -140,6 +147,7 @@ function selectionSort() {
 function insertionSortOneStep(curIndex, counter) {
     for (let i = 0; i < counter - 1; i++) {
         numbers[i].fill = SORTED_COLOR;
+        numbers[i].stroke = SORTED_BORDER;
     }
     updateDisplay();
     if (counter === numbers.length + 1) {
@@ -150,22 +158,29 @@ function insertionSortOneStep(curIndex, counter) {
     if (curIndex === 0 || numbers[curIndex].value > numbers[curIndex - 1].value) {
         if (curIndex + 1 < numbers.length) {
             numbers[curIndex + 1].fill = SORTED_COLOR;
+            numbers[curIndex + 1].stroke = SORTED_BORDER;
             numbers[curIndex].fill = SORTED_COLOR;
+            numbers[curIndex].stroke = SORTED_BORDER;
         }
         counter++;
         curIndex = counter;
 
-        if (counter > 0 && counter - 1 < numbers.length)
+        if (counter > 0 && counter - 1 < numbers.length) {
             numbers[counter - 1].fill = POINTER_COLOR;
+            numbers[counter - 1].stroke = UNSORTED_BORDER;
+        }
     }
     else if (numbers[curIndex].value < numbers[curIndex - 1].value) {
         var temp = numbers[curIndex].value;
         numbers[curIndex].value = numbers[curIndex - 1].value;
         numbers[curIndex - 1].value = temp;
 
-        if (curIndex > 0)
+        if (curIndex > 0) {
             numbers[curIndex - 1].fill = POINTER_COLOR;
+            numbers[curIndex - 1].stroke = UNSORTED_BORDER;
+        }
         numbers[curIndex].fill = SORTED_COLOR;
+        numbers[curIndex].stroke = SORTED_BORDER;
     }
     updateDisplay();
     setTimeout(function(i, j) { insertionSortOneStep(i, j); }, Math.floor(1000 / numbers.length), curIndex - 1, counter);
@@ -181,6 +196,7 @@ function insertionSort() {
 function bubbleSortOneStep(curIndex, counter) {
     if (counter === 0) {
         numbers[0].fill = SORTED_COLOR;
+        numbers[0].stroke = SORTED_BORDER;
         updateDisplay();
 
         disableButtons(false);
@@ -189,15 +205,19 @@ function bubbleSortOneStep(curIndex, counter) {
     }
     if (curIndex === counter) {
         numbers[counter].fill = SORTED_COLOR;
+        numbers[counter].stroke = SORTED_BORDER;
         curIndex = 0;
         counter--;
         if (counter >= 0) {
             numbers[counter].fill = UNSORTED_COLOR;
+            numbers[counter].stroke = UNSORTED_BORDER;
         }
     }
     numbers[curIndex].fill = POINTER_COLOR;
+    numbers[curIndex].fill = UNSORTED_BORDER;
     if (curIndex > 0) {
         numbers[curIndex - 1].fill = UNSORTED_COLOR;
+        numbers[curIndex - 1].stroke = UNSORTED_BORDER;
     }
     if (numbers[curIndex].value > numbers[curIndex + 1].value) {
         var temp = numbers[curIndex].value;
@@ -205,7 +225,9 @@ function bubbleSortOneStep(curIndex, counter) {
         numbers[curIndex + 1].value = temp;
 
         numbers[curIndex + 1].fill = POINTER_COLOR;
+        numbers[curIndex + 1].stroke = UNSORTED_BORDER;
         numbers[curIndex].fill = UNSORTED_COLOR;
+        numbers[curIndex].stroke = UNSORTED_BORDER;
     }
     updateDisplay();
     setTimeout(function(i, j) { bubbleSortOneStep(i, j); }, Math.floor(300 / numbers.length), curIndex + 1, counter);
@@ -274,7 +296,7 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
     }
     if (leftIndex < leftArray.length || rightIndex < rightArray.length) {
         numbers[curIndex].fill = POINTER_COLOR;
-        
+
         var next = curIndex + leftArray.length;
         if (next < numbers.length) {
             numbers[next].fill = POINTER_COLOR;
@@ -296,6 +318,7 @@ function mergeSortColor(curIndex) {
         return;
     }
     numbers[curIndex].fill = SORTED_COLOR;
+    numbers[curIndex].stroke = SORTED_BORDER;
     updateDisplay();
     setTimeout(function(a) { mergeSortColor(a); }, Math.floor(800 / numbers.length), curIndex + 1);
 }
