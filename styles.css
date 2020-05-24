@@ -178,3 +178,58 @@ button {
   color: #385D84;
   cursor: pointer;
 }
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+    body {
+      font-size: 12px;
+    }
+
+    .sort_button {
+      font-size: 12px;
+      padding: 8px;
+      margin-left: 4px;
+    }
+
+    .generate_button {
+      font-size: 12px;
+      width: 160px;
+      height: 40px;
+    }
+
+    .unsorted_color {
+      width: 18px;
+      height: 18px;
+    }
+
+    .sorted_color {
+      width: 18px;
+      height: 18px;
+    }
+
+    .compare_color {
+      width: 18px;
+      height: 18px;
+    }
+
+    .color_info {
+      font-size: 8px;
+    }
+
+    .select-box {
+      font-size: 12px;
+      width: 160px;
+      margin-right: 8px;
+    }
+
+    .selected::after {
+      top: 10px;
+    }
+
+    .select-box .options-container.active + .selected::after {
+      top: -10px;
+    }
+}
