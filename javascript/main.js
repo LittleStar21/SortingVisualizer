@@ -72,7 +72,7 @@ function updateDisplay() {
     }
 
     var x = 50;
-    var width = Math.floor((1000 - x) / numbers.length);
+    var width = Math.floor((950 - x) / numbers.length);
     for (let i = 0; i < numbers.length; i++, x+= width) {
         var bar = document.createElementNS("http://www.w3.org/2000/svg", "rect");
         var y = 570 - numbers[i].value;     
