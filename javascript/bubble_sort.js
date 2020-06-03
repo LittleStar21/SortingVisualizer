@@ -37,10 +37,3 @@ function bubbleSortOneStep(curIndex, counter) {
     updateDisplay();
     setTimeout(function(i, j) { bubbleSortOneStep(i, j); }, Math.floor(300 / numbers.length), curIndex + 1, counter);
 }
-
-function bubbleSort() {
-    if (!sorted) {
-        disableButtons(true);
-        bubbleSortOneStep(0, numbers.length - 1);
-    }
-}

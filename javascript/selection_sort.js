@@ -43,10 +43,3 @@ function selectionSortOneStep(counter, curIndex, minIndex) {
     updateDisplay();
     setTimeout(function(i, j, k) { selectionSortOneStep(i, j, k); }, Math.floor(350 / numbers.length), counter, curIndex + 1, minIndex);
 }
-
-function selectionSort() {
-    if (!sorted) {
-        disableButtons(true);
-        selectionSortOneStep(0, 0, 0);
-    }
-}

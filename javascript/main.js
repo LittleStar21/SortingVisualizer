@@ -7,7 +7,7 @@ const SORTED_BORDER = "#385D84";
 class Bar {
     constructor(idNum, value) {
         this.idNum = idNum;
-        this.value = value
+        this.value = value;
         this.fill = UNSORTED_COLOR;
         this.stroke = UNSORTED_BORDER;
     }
@@ -88,5 +88,33 @@ function updateDisplay() {
         bar = document.getElementById("bar" + i.toString());
         bar.style.fill = numbers[i].fill;
         bar.style.stroke = numbers[i].stroke;
+    }
+}
+
+function selectionSort() {
+    if (!sorted) {
+        disableButtons(true);
+        selectionSortOneStep(0, 0, 0);
+    }
+}
+
+function insertionSort() {
+    if (!sorted) {
+        disableButtons(true);
+        insertionSortOneStep(0, 0);
+    }
+}
+
+function bubbleSort() {
+    if (!sorted) {
+        disableButtons(true);
+        bubbleSortOneStep(0, numbers.length - 1);
+    }
+}
+
+function mergeSort() {
+    if (!sorted) {
+        disableButtons(true);
+        mergeSortProcess(1, 0, numbers.length, 0, [], 0, [], 0, 0);
     }
 }

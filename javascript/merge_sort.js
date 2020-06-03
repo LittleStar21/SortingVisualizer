@@ -1,4 +1,4 @@
-function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex) {
+function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex, startIndex) {
     if (i > size - 1 && leftIndex >= leftArray.length && rightIndex >= rightArray.length) {
         mergeSortColor(0);
         return;
@@ -30,6 +30,10 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
         j += i * 2;
     }
 
+    if (leftIndex == 0 && rightIndex == 0) {
+        startIndex = curIndex;
+    }
+
     if (leftIndex < leftArray.length && rightIndex < rightArray.length) {
         if (leftArray[leftIndex] <= rightArray[rightIndex]) {
             numbers[curIndex].value = leftArray[leftIndex];
@@ -56,7 +60,7 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
         numbers[curIndex].fill = POINTER_COLOR;
 
         var next = curIndex + leftArray.length;
-        if (next < numbers.length) {
+        if (next < numbers.length && next < startIndex + (leftArray.length * 2) + 1) {
             numbers[next].fill = POINTER_COLOR;
         }
     } else {
@@ -64,9 +68,9 @@ function mergeSortProcess(i, j, size, leftIndex, leftArray, rightIndex, rightArr
     }
 
     updateDisplay();
-    setTimeout(function(a, b, c, d, e, f, g, h) {
-        mergeSortProcess(a, b, c, d, e, f, g, h);
-    }, Math.floor(1000 / numbers.length), i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex);
+    setTimeout(function(a, b, c, d, e, f, g, h, i) {
+        mergeSortProcess(a, b, c, d, e, f, g, h, i);
+    }, Math.floor(1000 / numbers.length), i, j, size, leftIndex, leftArray, rightIndex, rightArray, curIndex, startIndex);
 }
 
 function mergeSortColor(curIndex) {
@@ -79,11 +83,4 @@ function mergeSortColor(curIndex) {
     numbers[curIndex].stroke = SORTED_BORDER;
     updateDisplay();
     setTimeout(function(a) { mergeSortColor(a); }, Math.floor(800 / numbers.length), curIndex + 1);
-}
-
-function mergeSort() {
-    if (!sorted) {
-        disableButtons(true);
-        mergeSortProcess(1, 0, numbers.length, 0, [], 0, [], 0);
-    }
 }

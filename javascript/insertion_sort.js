@@ -39,10 +39,3 @@ function insertionSortOneStep(curIndex, counter) {
     updateDisplay();
     setTimeout(function(i, j) { insertionSortOneStep(i, j); }, Math.floor(1000 / numbers.length), curIndex - 1, counter);
 }
-
-function insertionSort() {
-    if (!sorted) {
-        disableButtons(true);
-        insertionSortOneStep(0, 0);
-    }
-}
