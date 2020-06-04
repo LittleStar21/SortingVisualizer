@@ -132,7 +132,7 @@ button {
 
 .color_info {
   display: inline;
-  font-size: 12px;
+  font-size: 14px;
   color: #F2F2F2;
   position: relative;
 }
@@ -194,6 +194,7 @@ button {
 
     body {
       overflow: scroll;
+      font-size: 16px;
     }
 
     .first_two_sort {
@@ -209,26 +210,27 @@ button {
     }
 
     .sort_button {
-      font-size: 18px;
-      padding: 14px;
+      font-size: 17px;
+      padding: 16px;
     }
 
     .color_info {
-      font-size: 16px;
+      float: center - 5px;
+      font-size: 15px;
       margin-left: 15px;
-      margin-top: 10px;
-      display: inline-block;
     }
 
     .generate_button {
+      font-size: 20px;
       margin-top: 30px;
-      margin-left: 35px;
+      width: 280px;
+      margin-left: 25px;
+      float: center;
     }
 
     .select-box {
-      position: relative;
-      float: right;
+      font-size: 16px;
       margin-right: 20px;
-      margin-top: 20px;
+      margin-top: -15px;
     }
 }
