@@ -9,11 +9,19 @@ button {
   margin-right: 5px;
 }
 
+.first_two_sort {
+  display: inline;
+}
+
+.second_two_sort {
+  display: inline;
+}
+
 .sort_button {
   font-size: 16px;
   margin-top: 16px;
   margin-left: 6px;
-  padding: 12px;
+  padding: 14px;
   background-color: #385D84;
   color: #F2F2F2;
   border: none;
@@ -33,10 +41,10 @@ button {
 
 .select-box {
   float: right;
-  margin-top: 15px;
+  margin-top: 20px;
   margin-right: 20px;
   font-size: 14px;
-  display: inline-flex;
+  display: flex;
   width: 250px;
   height: 150px;
   flex-direction: column;
@@ -123,6 +131,7 @@ button {
 }
 
 .color_info {
+  display: inline;
   font-size: 12px;
   color: #F2F2F2;
   position: relative;
@@ -184,51 +193,42 @@ button {
   and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
-      font-size: 12px;
+      overflow: scroll;
+    }
+
+    .first_two_sort {
+      float: left;
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    .second_two_sort {
+      float: right;
+      margin-right: 20px;
+      margin-top: 10px;
     }
 
     .sort_button {
-      font-size: 12px;
-      padding: 8px;
-      margin-left: 4px;
-    }
-
-    .generate_button {
-      font-size: 12px;
-      width: 160px;
-      height: 40px;
-    }
-
-    .unsorted_color {
-      width: 18px;
-      height: 18px;
-    }
-
-    .sorted_color {
-      width: 18px;
-      height: 18px;
-    }
-
-    .compare_color {
-      width: 18px;
-      height: 18px;
+      font-size: 18px;
+      padding: 14px;
     }
 
     .color_info {
-      font-size: 8px;
+      font-size: 16px;
+      margin-left: 15px;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .generate_button {
+      margin-top: 30px;
+      margin-left: 35px;
     }
 
     .select-box {
-      font-size: 12px;
-      width: 160px;
-      margin-right: 8px;
-    }
-
-    .selected::after {
-      top: 10px;
-    }
-
-    .select-box .options-container.active + .selected::after {
-      top: -10px;
+      position: relative;
+      float: right;
+      margin-right: 20px;
+      margin-top: 20px;
     }
 }
