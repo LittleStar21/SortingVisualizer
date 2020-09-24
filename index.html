@@ -8,7 +8,6 @@
         <title>Sorting Algorithm Visualizer</title>
     </head>
     <body>
-        <!-- Sorting buttons -->
         <div class="first_two_sort">
             <button id="selectionSort" class="sort_button" onclick="selectionSort();" style="padding-left: 16px;">Selection Sort</button>
             <button id="insertionSort" class="sort_button" onclick="insertionSort();">Insertion Sort</button>
@@ -17,18 +16,12 @@
             <button id="bubbleSort" class="sort_button" onclick="bubbleSort();">Bubble Sort</button>
             <button id="mergeSort" class="sort_button" onclick="mergeSort();">Merge Sort</button>
         </div>
-
-        <!-- Generate random button -->
         <button id= "generate_random" class="generate_button" type="button" onclick="generateNums();">Generate Random</button>
-
-        <!-- Color info -->
         <div class="color_info">
             <button class="unsorted_color"></button>Unsorted
             <button class="sorted_color"></button>Sorted
             <button class="compare_color"></button>Comparing
         </div>
-
-        <!-- Number of elements -->
         <div class="select-box">
             <div class="options-container">
                 <div class="option">
@@ -45,13 +38,11 @@
                 </div>
                 <div class="option">
                     <input type="radio" class="radio" id="100" name="category">
-                    <label>100</label>
+                    <label>300</label>
                 </div>
             </div>
             <div class="selected" style="display: inline-block;">Num of Elements: 25</div>
         </div>
-
-        <!-- Bar -->
         <div>
             <svg width="950" height="700" id="groupBar"></svg>
         </div>
